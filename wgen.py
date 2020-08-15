@@ -60,5 +60,5 @@ def main():
         createWordList(chars, min_length, max_length, head, tail, output)
     except PermissionError:
         print("[!] You have no permission to write here")
-        print("[?] You need administrator permission to wrote here")
+        print("[?] You need administrator permission to write here")
 main()
