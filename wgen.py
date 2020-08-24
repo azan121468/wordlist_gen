@@ -82,4 +82,5 @@ def main():
     except PermissionError:
         print("[!] You have no permission to write here")
         print("[?] You need administrator permission to wrote here")
+
 main()
