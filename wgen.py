@@ -39,25 +39,34 @@ def createWordList(chars, min_length, max_length, head, tail, output):
     print ('[+] Creating wordlist at `%s`...' % output)
 
     output = open(output, 'w')
-
     try:
-        reverse_chars=[]
+        strings_to_write=[]
+        print("[+] Saving strings in memory")
         for n in range(min_length, max_length + 1):
             for i in itertools.product(chars, repeat=n):
-                chars = head+''.join(i)+tail
-                reverse_chars.append(chars[::-1])
-                output.write("%s\n" % chars)
-                sys.stdout.write('\r[+] saving character `%s`' % chars)
-                total_words+=1
-                sys.stdout.flush()
-            for i in reverse_chars:
-                output.write("%s\n" % i)
-                sys.stdout.write('\r[+] saving character `%s`' % i)
-                total_words += 1
-                sys.stdout.flush()
-        output.close()
+                word = head+''.join(i)+tail
+                reverse_word = head + ''.join(i)[::-1] + tail
+                strings_to_write.append(word)
+                strings_to_write.append(reverse_word)
+        #         output.write("%s\n" % chars)
+        #         sys.stdout.write('\r[+] saving character `%s`' % chars)
+        #         total_words+=1
+        #         sys.stdout.flush()
+        # output.close()
+        print("[+] Removing duplicates if any")
+        strings_to_write = list(set(strings_to_write))
+        print("[+] Duplicates removed sucessfully")
+        print("[+] Write in memory sucessful")
+        print("[+] Writing strings on disk")
+        for i in strings_to_write:
+            output.write("%s\n" % i)
+            sys.stdout.write('\r[+] saving character `%s`' % i)
+            total_words += 1
+            sys.stdout.flush()
+        print("\n[+] Write in disk sucessful")
     except KeyboardInterrupt:
         print("\nUser has exited using CTRL + C")
+        print("[-] Write in disk was interrupted")
 
 
 def main():
@@ -65,6 +74,9 @@ def main():
     title()
     print("Enter characterset : ",end="")
     chars=input()
+    if not chars:
+        print("[-] No characterset was given")
+        sys.exit()
     chars=remove_duplicates(chars)
     print("Enter minimum length : ",end="")
     min_length=int(input())
@@ -75,12 +87,13 @@ def main():
     print("Tail (if any) : ",end="")
     tail=input() or ""
     print("Enter output : ",end="")
-    output=input()
+    output=input() or "wordlist.txt"
     try:
         createWordList(chars, min_length, max_length, head, tail, output)
         print(f"\nNumber of words written are {total_words}")
     except PermissionError:
         print("[!] You have no permission to write here")
         print("[?] You need administrator permission to wrote here")
-
-main()
+        
+if __name__=="__main__":
+    main()
