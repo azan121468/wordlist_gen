@@ -48,11 +48,6 @@ def createWordList(chars, min_length, max_length, head, tail, output):
                 reverse_word = head + ''.join(i)[::-1] + tail
                 strings_to_write.append(word)
                 strings_to_write.append(reverse_word)
-        #         output.write("%s\n" % chars)
-        #         sys.stdout.write('\r[+] saving character `%s`' % chars)
-        #         total_words+=1
-        #         sys.stdout.flush()
-        # output.close()
         print("[+] Removing duplicates if any")
         strings_to_write = list(set(strings_to_write))
         print("[+] Duplicates removed sucessfully")
