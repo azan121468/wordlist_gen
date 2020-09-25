@@ -43,35 +43,6 @@ def createWordList(chars, min_length, max_length, head, tail, output):
 
     output = open(output, 'w')
     try:
-        # strings_to_write=[]
-        # reverse_of_strings_to_write=[]
-        # print("[+] Saving strings in memory")
-        # try:
-        #     for n in range(min_length, max_length + 1):
-        #         for i in itertools.product(chars, repeat=n):
-        #            word = head+''.join(i)+tail
-        #            reverse_word = head + ''.join(i)[::-1] + tail
-        #            strings_to_write.append(word)
-        #            reverse_of_strings_to_write.append(reverse_word)
-        # except MemoryError:
-        #     print("[-] Memory Error has been occured")
-        #     print("[-] Use big_wgen.py to generate wordlist")
-        #     print("[+] Removing list from memory")
-        #     del strings_to_write
-        #     print("[+] Sucessfully deleted list from memory")
-        #     sys.exit()
-        # except KeyboardInterrupt:
-        #     print("[-] User has interrupt while chraracter were being saved in memory.")
-        #     print("[+] Removing list from memory")
-        #     del strings_to_write
-        #     print("[+] Sucessfully deleted list from memory")
-        #     sys.exit()
-        # print("[+] Removing duplicates if any")
-        # strings_to_write = list(set(strings_to_write))
-        # reverse_of_strings_to_write = list(set(reverse_of_strings_to_write))
-        # print("[+] Duplicates removed sucessfully")
-        # print("[+] Write in memory sucessful")
-        # print("[+] Writing strings on disk")
         for n in range(min_length, max_length + 1):
             for i in itertools.product(chars, repeat=n):
                 x = head + ''.join(i) + tail
@@ -79,15 +50,16 @@ def createWordList(chars, min_length, max_length, head, tail, output):
                 sys.stdout.write('\r[+] saving character `%s`' % x)
                 total_words += 1
                 sys.stdout.flush()
-        for n in range(min_length, max_length + 1):
-            for i in itertools.product(chars, repeat=n):
-                if not are_same(i):
-                    x = head + ''.join(i[::-1]) + tail
-                    output.write("%s\n" % x)
-                    sys.stdout.write('\r[+] saving character `%s`' % x)
-                    total_words += 1
-                    sys.stdout.flush()
-        print("\n[+] Write in disk sucessful")
+        if (len(head)!=0 and len(tail)!=0):
+            for n in range(min_length, max_length + 1):
+                for i in itertools.product(chars, repeat=n):
+                    if not are_same(i):
+                        x = head + ''.join(i[::-1]) + tail
+                        output.write("%s\n" % x)
+                        sys.stdout.write('\r[+] saving character `%s`' % x)
+                        total_words += 1
+                        sys.stdout.flush()
+            print("\n[+] Write in disk sucessful")
     except KeyboardInterrupt:
         print("\nUser has exited using CTRL + C")
         print("[-] Write in disk was interrupted")
