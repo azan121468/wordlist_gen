@@ -35,6 +35,13 @@ def createWordList(chars, min_length, max_length, head, tail, output):
     if min_length > max_length:
         print ("[!] Please `min_length` must smaller or same as with `max_length`")
         sys.exit()
+        
+def not_same(string):
+    """return true if all characters are not same"""
+    if len(set(string))==1:
+         return False
+    else:
+         return True
 
     print ('[+] Creating wordlist at `%s`...' % output)
 
@@ -49,7 +56,8 @@ def createWordList(chars, min_length, max_length, head, tail, output):
                    word = head+''.join(i)+tail
                    reverse_word = head + ''.join(i)[::-1] + tail
                    strings_to_write.append(word)
-                   reverse_of_strings_to_write.append(reverse_word)
+                   if not_same(reverse_word):
+                       reverse_of_strings_to_write.append(reverse_word)
         except MemoryError:
             print("[-] Memory Error has been occured")
             print("[-] Use big_wgen.py to generate wordlist")
