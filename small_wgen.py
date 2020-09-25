@@ -26,7 +26,12 @@ def sort_string(string):
     return_string=''.join(sorted(string))
     return return_string
 
-
+def not_same(string):
+    """return true if all characters are not same"""
+    if len(set(string))==1:
+         return False
+    else:
+         return True
 
 def createWordList(chars, min_length, max_length, head, tail, output):
     """Creates wordlist based on given data"""
@@ -34,13 +39,6 @@ def createWordList(chars, min_length, max_length, head, tail, output):
     if min_length > max_length:
         print ("[!] Please `min_length` must smaller or same as with `max_length`")
         sys.exit()
-        
-def not_same(string):
-    """return true if all characters are not same"""
-    if len(set(string))==1:
-         return False
-    else:
-         return True
 
     print ('[+] Creating wordlist at `%s`...' % output)
 
@@ -64,7 +62,7 @@ def not_same(string):
             del strings_to_write
             print("[+] Sucessfully deleted list from memory")
             sys.exit()
-        except :
+        except KeyboardInterrupt:
             print("[-] User has interrupt while chraracter were being saved in memory.")
             print("[+] Removing list from memory")
             del strings_to_write
@@ -81,12 +79,13 @@ def not_same(string):
             sys.stdout.write('\r[+] saving character `%s`' % i)
             total_words += 1
             sys.stdout.flush()
-        for m in reverse_of_strings_to_write:
-            output.write("%s\n" % m)
-            sys.stdout.write('\r[+] saving character `%s`' % m)
-            total_words += 1
-            sys.stdout.flush()
-        print("\n[+] Write in disk sucessful")
+        if (len(head)!=0 and len(tail)!=0):
+            for m in reverse_of_strings_to_write:
+                output.write("%s\n" % m)
+                sys.stdout.write('\r[+] saving character `%s`' % m)
+                total_words += 1
+                sys.stdout.flush()
+            print("\n[+] Write in disk sucessful")
     except KeyboardInterrupt:
         print("\nUser has exited using CTRL + C")
         print("[-] Write in disk was interrupted")
