@@ -1,7 +1,6 @@
 import os
 import sys
 import itertools
-import sys
 
 total_words=0
 
