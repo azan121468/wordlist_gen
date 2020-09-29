@@ -79,7 +79,7 @@ def createWordList(chars, min_length, max_length, head, tail, output):
             sys.stdout.write('\r[+] saving character `%s`' % i)
             total_words += 1
             sys.stdout.flush()
-        if (len(head)!=0 and len(tail)!=0):
+        if (head or tail) and head!=tail:
             for m in reverse_of_strings_to_write:
                 output.write("%s\n" % m)
                 sys.stdout.write('\r[+] saving character `%s`' % m)
