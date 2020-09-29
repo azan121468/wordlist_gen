@@ -50,7 +50,8 @@ def createWordList(chars, min_length, max_length, head, tail, output):
                 sys.stdout.write('\r[+] saving character `%s`' % x)
                 total_words += 1
                 sys.stdout.flush()
-        if (len(head)!=0 and len(tail)!=0):
+           
+        if (head or tail) and head!=tail:
             for n in range(min_length, max_length + 1):
                 for i in itertools.product(chars, repeat=n):
                     if not are_same(i):
